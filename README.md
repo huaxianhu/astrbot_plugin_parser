@@ -64,7 +64,7 @@ _✨ 链接解析器 ✨_
 
 插件支持自定义解析器，通过继承 `BaseParser` 类并实现 `platform`, `handle` 即可。
 
-示例解析器请看 [示例解析器](https://github.com/Zhalslar/astrbot_plugin_box/core/parsers/resource/example.py)
+示例解析器请看 [示例解析器](https://github.com/Zhalslar/astrbot_plugin_parser/blob/main/core/parsers/example.py)
 
 ## 🎉 致谢
 
