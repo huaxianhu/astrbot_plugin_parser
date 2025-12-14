@@ -95,6 +95,12 @@
         "hint": "用于B站解析的登录Cookies，留空则使用无登录状态",
         "default": ""
     },
+    "douyin_ck": {
+        "description": "抖音 Cookies",
+        "type": "text",
+        "hint": "用于抖音解析的登录Cookies，可提高解析成功率。留空则使用无登录状态",
+        "default": ""
+    },
     "bili_video_codecs": {
         "description": "B站视频编码",
         "type": "string",

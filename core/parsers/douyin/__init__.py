@@ -21,6 +21,12 @@ class DouyinParser(BaseParser):
 
     def __init__(self, config: AstrBotConfig, downloader: Downloader):
         super().__init__(config, downloader)
+        # 如果配置了抖音 cookie，添加到请求头
+        if douyin_ck := config.get("douyin_ck"):
+            self.headers["Cookie"] = douyin_ck
+            self.ios_headers["Cookie"] = douyin_ck
+            self.android_headers["Cookie"] = douyin_ck
+
     # https://v.douyin.com/_2ljF4AmKL8
     @handle("v.douyin", r"v\.douyin\.com/[a-zA-Z0-9_\-]+")
     @handle("jx.douyin", r"jx\.douyin\.com/[a-zA-Z0-9_\-]+")
