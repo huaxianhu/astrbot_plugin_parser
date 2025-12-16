@@ -25,7 +25,6 @@ from astrbot.core.message.components import (
     Nodes,
     Plain,
     Record,
-    Reply,
     Video,
 )
 from astrbot.core.platform.astr_message_event import AstrMessageEvent
@@ -272,13 +271,12 @@ class ParserPlugin(Star):
 
         # 仲裁机制：谁贴的表情ID值最小，谁来解析
         if isinstance(event, AiocqhttpMessageEvent):
-            winner_id = await self.arbiter.compete(
+            is_win = await self.arbiter.compete(
                 bot=event.bot,
                 message_id=int(event.message_obj.message_id),
                 self_id=int(self_id),
             )
-
-            if winner_id != int(self_id):
+            if not is_win:
                 return
 
         # 耗时任务：解析+渲染+合并+发送
@@ -395,19 +393,6 @@ class ParserPlugin(Star):
             yield event.plain_result("解析已关闭")
         else:
             yield event.plain_result("解析已关闭，无需重复关闭")
-
-    @filter.command("解析表情")
-    async def fetch_emoji_like(self, event: AiocqhttpMessageEvent):
-        """解析贴的表情"""
-        mid = None
-        for seg in event.get_messages():
-            if isinstance(seg, Reply):
-                mid = seg.id
-        result = await event.bot.fetch_emoji_like(
-            message_id=mid, emojiId="26", emojiType="1"
-        )
-        print(result)
-        yield event.plain_result(str(result))
 
     async def terminate(self):
         """插件卸载时"""
