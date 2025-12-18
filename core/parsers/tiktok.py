@@ -28,7 +28,7 @@ class TikTokParser(BaseParser):
 
         # 下载封面和视频
         cover = self.downloader.download_img(video_info.thumbnail, proxy=self.proxy)
-        video = self.downloader.download_video(url, use_ytdlp=True)
+        video = self.downloader.download_video(url, use_ytdlp=True, proxy=self.proxy)
 
         return self.result(
             title=video_info.title,
